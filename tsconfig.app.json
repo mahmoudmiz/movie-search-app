@@ -23,5 +23,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "test-setup.ts"]
+  "include": ["src", "test-setup.ts", "axios.config.ts"]
 }

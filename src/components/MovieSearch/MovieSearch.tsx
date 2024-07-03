@@ -7,8 +7,8 @@ import useDebounce from "../../hooks/useDebounce";
 import SearchInput from "./SearchInput/SearchInput";
 import NotFound from "./NotFound/NotFound";
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-const API_KEY = import.meta.env.VITE_API_KEY;
+import axiosInstance from '../../../axios.config.ts'
+import { ApiRoutes } from "../../services/api-routes.ts";
 
 const MovieSearch = () => {
   const { movies, setMovies, loading, setLoading, error, setError } =
@@ -19,13 +19,12 @@ const MovieSearch = () => {
 
   const fetchMovies = async (query: string) => {
     try {
-      const response = await fetch(
-        `${API_BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`
-      );
-      if (!response.ok) {
+      const response = await axiosInstance.get(ApiRoutes.SEARCH_MOVIES + query);
+
+      if (response.status !== 200) {
         throw new Error("Failed to fetch movies");
       }
-      const data = await response.json();
+      const data = response.data;
       return data.results;
     } catch (err) {
       console.error(err);

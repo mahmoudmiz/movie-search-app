@@ -18,7 +18,7 @@ interface MovieCardProps {
 }
 
 const MovieCard = ({ movie }: MovieCardProps) => {
-  console.log(movie, "movie");
+  
   return (
     <Card
       data-testid="movie-card"
